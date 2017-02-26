@@ -3,6 +3,8 @@ package com.bignerdranch.android.cicada;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
+import com.iflytek.cloud.SpeechUtility;
 
 import io.rong.imkit.RongIM;
 
@@ -14,10 +16,10 @@ public class App extends Application {
 
     @Override
     public void onCreate() {
+        SpeechUtility.createUtility(App.this, "appid=" + getString(R.string.app_id));
         super.onCreate();
 
         /**
-         *
          * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
          * io.rong.push 为融云 push 进程名称，不可修改。
          */
@@ -28,6 +30,7 @@ public class App extends Application {
              * IMKit SDK调用第一步 初始化
              */
             RongIM.init(this);
+
 
             if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
 

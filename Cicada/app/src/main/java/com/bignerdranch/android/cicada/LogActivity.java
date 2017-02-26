@@ -1,5 +1,9 @@
 package com.bignerdranch.android.cicada;
 
+/**
+ * Created by Administrator on 2/20/2017.
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,27 +23,35 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
 /**
- * Created by Administrator on 2/19/2017.
+ * Created by Bob on 15/8/19.
+ * 登录页面
+ * 1，token 从自己 server 获取的演示
+ * 2，拿到 token 后，做 connect 操作
  */
+public class LogActivity extends Activity {
 
-public class LoginActivity extends Activity {
-    private String token1;
-    //private static final String token3 = "MSj5ApTgpvwrQoupM2R3sfhJ+LSWphCHE+/oC0b/YHPmWlr46cLgMcZyHvsx4hdQgeWbUuSOIBZ4FcFDMDKcvQ==";
+    /**
+     * token 的主要作用是身份授权和安全，因此不能通过客户端直接访问融云服务器获取 token，
+     * 您必须通过 Server API 从融云服务器 获取 token 返回给您的 App，并在之后连接时使用
+     */
+    private String token;
+    public static final String TAG = "Success";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        Button btn = (Button) findViewById(R.id.sign_in);
+        Button btn = (Button) findViewById(R.id.bt1);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG,"login start");
                 login();
+                Log.d(TAG,"login success");
             }
         });
-
     }
 
     /**
@@ -92,11 +104,14 @@ public class LoginActivity extends Activity {
                         JSONObject jobj = object.getJSONObject("result");
 
                         if (object.getInt("code") == 200) {
-                            token1 = jobj.getString("token");
-                            connect(token1);
+                            token = jobj.getString("token");
+                            Log.d(TAG,"connect start");
+                            token = "MSj5ApTgpvwrQoupM2R3sfhJ+LSWphCHE+/oC0b/YHPmWlr46cLgMcZyHvsx4hdQgeWbUuSOIBZ4FcFDMDKcvQ==";
+                            connect(token);
+                            Log.d(TAG,"connect success");
 
                             SharedPreferences.Editor edit = DemoContext.getInstance().getSharedPreferences().edit();
-                            edit.putString("DEMO_TOKEN", token1);
+                            edit.putString("DEMO_TOKEN", token);
                             edit.apply();
 
                         }
@@ -128,7 +143,7 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onTokenIncorrect() {
 
-                    Log.d("LoginActivity", "--onTokenIncorrect");
+                    Log.d("LogActivity", "--onTokenIncorrect");
                 }
 
                 /**
@@ -138,8 +153,8 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onSuccess(String userid) {
 
-                    Log.d("LoginActivity", "--onSuccess" + userid);
-                    startActivity(new Intent(LoginActivity.this, ConversationListActivity.class));
+                    Log.d("LogActivity", "--onTokenSuccess" + userid);
+                    startActivity(new Intent(LogActivity.this, Iat.class));
                     finish();
                 }
 
@@ -151,9 +166,10 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onError(RongIMClient.ErrorCode errorCode) {
 
-                    Log.d("LoginActivity", "--onError" + errorCode);
+                    Log.d("LogActivity", "--onTokenError" + errorCode);
                 }
             });
         }
     }
 }
+

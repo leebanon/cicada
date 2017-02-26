@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Cicada"
+            android:textSize="30sp" />
+
+        <ImageButton
+            android:id="@+id/image_iat_set"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/main_setting_btn_np" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/iat_text"
+        android:layout_width="match_parent"
+        android:gravity="top|left"
+        android:paddingBottom="20dp"
+        android:textSize="20sp"
+        android:layout_height="200dp"/>
+    <Button
+        android:id="@+id/iat_recognize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始"
+        android:textSize="20sp" />
+    <Button
+        android:id="@+id/iat_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="停止"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"/>
+
+</LinearLayout>
