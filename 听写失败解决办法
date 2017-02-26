@@ -1,0 +1,5 @@
+#听写失败解决办法
+点击开始按钮后，Toast提示“听写失败,错误码：21001”，查询后发现出现错误码21001的原因是：ERROR_COMPONENT_NOT_INSTALLED,即没有安装语音组件，语音组件依赖
+与libmfc.so文件有关，在讯飞云官网上查询找到了解决办法：
+http://bbs.xfyun.cn/forum.php?mod=viewthread&tid=16306
+在main文件夹中加入jniLibs文件夹，将讯飞SDK的libs中各个版本的libmfc.so文件复制到jniLibs文件夹中，重新运行即可。
