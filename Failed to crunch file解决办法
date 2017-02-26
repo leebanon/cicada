@@ -1,0 +1,11 @@
+http://blog.csdn.net/jacklog/article/details/53185276
+
+Error:com.Android.builder.internal.aapt.AaptException: Failed to crunch file C:\Users\Desktop\map\BaiduLBS_AndroidSDK_Sample\
+BaiduMap_AndroidSDK_v4.1.1_Sample\BaiduMapsApiASDemo\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\res\
+drawable-hdpi\abc_textfield_search_default_mtrl_alpha.9.png into C:\Users\Desktop\map\BaiduLBS_AndroidSDK_Sample\BaiduMap_AndroidSDK_v4.1.1
+_Sample\BaiduMapsApiASDemo\app\build\intermediates\res\merged\debug\drawable-hdpi\abc_textfield_search_default_mtrl_alpha.9.png
+
+编译时，出现以上错误，经过多次排除验证，原因竟然是因为路径字符太长了。。。
+
+
+将C:\Users\Desktop\map\BaiduLBS_AndroidSDK_Sample\BaiduMap_AndroidSDK_v4.1.1_Sample\ 改为C：\即可（即更换工程路径，或更改文件夹，路径长度好像是240个字符左右）
